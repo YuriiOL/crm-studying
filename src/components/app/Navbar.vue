@@ -5,7 +5,13 @@
         <a href="#" @click.prevent="$emit('side-button')">
           <i class="material-icons black-text">dehaze</i>
         </a>
-        <span class="black-text">12.12.12</span>
+        <span class="black-text">{{
+          `${date.getDate()}-${date.getMonth()}-${date.getFullYear()} ${(
+            "0" + date.getHours()
+          ).slice(-2)}:${("0" + date.getMinutes()).slice(-2)}:${(
+            "0" + date.getSeconds()
+          ).slice(-2)}`
+        }}</span>
       </div>
 
       <ul class="right hide-on-small-and-down">
@@ -14,6 +20,7 @@
             class="dropdown-trigger black-text"
             href="#"
             data-target="dropdown"
+            ref="drop"
           >
             USER NAME
             <i class="material-icons right">arrow_drop_down</i>
@@ -21,15 +28,15 @@
 
           <ul id="dropdown" class="dropdown-content">
             <li>
-              <a href="#" class="black-text">
+              <router-link to="/profile" class="black-text">
                 <i class="material-icons">account_circle</i>Профиль
-              </a>
+              </router-link>
             </li>
             <li class="divider" tabindex="-1"></li>
             <li>
-              <a href="#" class="black-text">
+              <router-link to="/login?messege=logout" class="black-text">
                 <i class="material-icons">assignment_return</i>Выйти
-              </a>
+              </router-link>
             </li>
           </ul>
         </li>
@@ -39,7 +46,28 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      date: new Date(),
+      interval: null,
+      dropdown: null,
+    };
+  },
+
+  methods: {},
+  mounted() {
+    this.interval = setInterval(() => {
+      this.date = new Date();
+    }, 1000);
+    this.d = window.M.Dropdown.init(this.$refs.drop, {
+      constrainWidth: false,
+    });
+  },
+  beforeDestroy() {
+    clearInterval(this.interval);
+  },
+};
 </script>
 
 <style lang="scss" scoped>
