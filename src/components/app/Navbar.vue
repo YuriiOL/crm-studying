@@ -34,7 +34,7 @@
             </li>
             <li class="divider" tabindex="-1"></li>
             <li>
-              <router-link to="/login?messege=logout" class="black-text">
+              <router-link to="/login?message=logout" class="black-text">
                 <i class="material-icons">assignment_return</i>Выйти
               </router-link>
             </li>

@@ -74,6 +74,7 @@
 
 <script>
 import { email, required, minLength } from "vuelidate/lib/validators";
+import messages from "@/utils/messages";
 export default {
   data() {
     return {
@@ -93,6 +94,11 @@ export default {
       }
       this.$router.push("/");
     },
+  },
+  mounted() {
+    if (messages[this.$route.query.message]) {
+      this.$message(messages[this.$route.query.message]);
+    }
   },
 };
 </script>
