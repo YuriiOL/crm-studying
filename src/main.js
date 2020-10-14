@@ -4,6 +4,7 @@ import Vuelidate from 'vuelidate'
 import router from './router'
 import store from './store'
 import messagePlugin from '@/utils/message.plugin'
+import Loader from './components/app/Loader.vue'
 import 'materialize-css/dist/js/materialize.min'
 import './registerServiceWorker'
 
@@ -13,6 +14,7 @@ import 'firebase/database'
 
 Vue.use(Vuelidate)
 Vue.use(messagePlugin)
+Vue.component('Loader', Loader)
 
 Vue.config.productionTip = false
 

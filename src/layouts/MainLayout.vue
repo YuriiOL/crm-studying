@@ -21,15 +21,19 @@ import Nav from "@/components/app/Navbar";
 import Side from "@/components/app/Sidebar";
 
 export default {
-  components: {
-    Nav,
-    Side,
-  },
-
   data() {
     return {
       isOpen: true,
     };
+  },
+  async mounted() {
+    if (!Object.keys(this.$store.getters.info).length) {
+      await this.$store.dispatch("fetchInfo");
+    }
+  },
+  components: {
+    Nav,
+    Side,
   },
 };
 </script>
