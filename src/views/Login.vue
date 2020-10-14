@@ -87,12 +87,21 @@ export default {
     password: { required, minLength: minLength(6) },
   },
   methods: {
-    submit() {
+    async submit() {
       if (this.$v.$invalid) {
         this.$v.$touch();
         return;
       }
-      this.$router.push("/");
+      const user = {
+        email: this.email,
+        password: this.password,
+      };
+      try {
+        await this.$store.dispatch("login", user);
+        this.$router.push("/");
+      } catch (e) {
+        console.log(e, "Misstake");
+      }
     },
   },
   mounted() {

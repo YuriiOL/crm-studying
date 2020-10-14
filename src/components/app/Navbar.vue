@@ -34,9 +34,9 @@
             </li>
             <li class="divider" tabindex="-1"></li>
             <li>
-              <router-link to="/login?message=logout" class="black-text">
+              <a href="#" class="black-text" @click.prevent="logout">
                 <i class="material-icons">assignment_return</i>Выйти
-              </router-link>
+              </a>
             </li>
           </ul>
         </li>
@@ -55,7 +55,12 @@ export default {
     };
   },
 
-  methods: {},
+  methods: {
+    async logout() {
+      await this.$store.dispatch("logout");
+      this.$router.push("/login?message=logout");
+    },
+  },
   mounted() {
     this.interval = setInterval(() => {
       this.date = new Date();

@@ -5,7 +5,19 @@
 </template>
 
 <script>
-export default {};
+import messages from "@/utils/messages";
+export default {
+  computed: {
+    error() {
+      return this.$store.getters.error;
+    },
+  },
+  watch: {
+    error(fbError) {
+      this.$error(messages[fbError.code] || "Хюстон у нас проблеми");
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

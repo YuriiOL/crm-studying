@@ -7,13 +7,36 @@ import messagePlugin from '@/utils/message.plugin'
 import 'materialize-css/dist/js/materialize.min'
 import './registerServiceWorker'
 
+import firebase from 'firebase/app'
+import 'firebase/auth'
+import 'firebase/database'
+
 Vue.use(Vuelidate)
 Vue.use(messagePlugin)
 
 Vue.config.productionTip = false
 
-new Vue({
+firebase.initializeApp({
+    apiKey: "AIzaSyCROj5dXsupPPaP5brEE4p1SiO2rNjYoG4",
+    authDomain: "vue-crm-studying.firebaseapp.com",
+    databaseURL: "https://vue-crm-studying.firebaseio.com",
+    projectId: "vue-crm-studying",
+    storageBucket: "vue-crm-studying.appspot.com",
+    messagingSenderId: "996734751852",
+    appId: "1:996734751852:web:b3f59b4042dc54f615b449",
+    measurementId: "G-GSPFPFGQQY"
+})
+
+let app
+firebase.auth().onAuthStateChanged(() => { 
+  if (!app) {
+  app = new Vue({
   router,
   store,
   render: h => h(App)
-}).$mount('#app')
+  }).$mount('#app')
+ }
+  
+})
+
+
