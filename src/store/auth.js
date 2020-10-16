@@ -19,14 +19,14 @@ export default {
     async register({ dispatch, commit }, { email, password, name }) {
       try {
         await firebase.auth().createUserWithEmailAndPassword(email, password)
-        const uid = await dispatch('getId')
+        const uid = await dispatch('getUid')
         await firebase.database().ref(`/users/${uid}/info`).set({bill: 10000, name})
       } catch (e) {
         commit('setError', e)
         throw e
       }
     },
-    getId() {
+    getUid() {
       const userInfo = firebase.auth().currentUser
       return userInfo ? userInfo.uid : null
     }
